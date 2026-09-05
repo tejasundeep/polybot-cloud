@@ -1,0 +1,14 @@
+services:
+  polybot-cloud:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: polybot-cloud:latest
+    container_name: polybot-cloud
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - POLYBOT_RUNNER_URL=${POLYBOT_RUNNER_URL:-http://localhost:8799}
+      - POLYBOT_AUTH_TOKEN=${POLYBOT_AUTH_TOKEN:-}

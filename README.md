@@ -6,7 +6,7 @@ Polybot Cloud is the responsive companion web application for [Polybot](https://
 
 ---
 
-## 🚀 1-Click Deploy to Cloud
+## 🚀 1-Click Cloud Deploy
 
 Deploy the web control plane in seconds with zero terminal setup:
 
@@ -24,14 +24,41 @@ Deploy the web control plane in seconds with zero terminal setup:
 
 ---
 
+## ⚡ 1-Line VPS / Linux Server Installer
+
+On any Linux VPS or server (Hetzner, DigitalOcean, AWS, Linode), run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tejasundeep/polybot-cloud/main/install.sh | bash
+```
+
+This automatically sets up Docker, builds the lightweight standalone container, and starts Polybot Cloud on port `3000`.
+
+---
+
+## 🐳 Docker Deployment
+
+You can also run Polybot Cloud directly using Docker or Docker Compose:
+
+```bash
+# Using Docker Compose
+docker compose up -d
+
+# Or with Docker run
+docker build -t polybot-cloud .
+docker run -d -p 3000:3000 --name polybot-cloud polybot-cloud
+```
+
+---
+
 ## ⚙️ Environment Variables
 
-When deploying, configure the following environment variables (or configure them directly in the UI via the **Runner Config** button):
+Configure these in your cloud provider settings or in `.env`:
 
 | Variable | Description | Default |
 | :--- | :--- | :--- |
-| `POLYBOT_RUNNER_URL` | The HTTP/HTTPS endpoint of your Polybot Harness Runner (e.g. `http://localhost:8799` or your VPS/Fly.io URL) | `http://localhost:8799` |
-| `POLYBOT_AUTH_TOKEN` | Bearer token secret matching `PSB_AUTH_TOKEN` on your runner (optional for local testing) | *(empty)* |
+| `POLYBOT_RUNNER_URL` | The endpoint of your local or remote Polybot runner | `http://localhost:8799` |
+| `POLYBOT_AUTH_TOKEN` | Bearer token secret matching `PSB_AUTH_TOKEN` on your runner | *(empty)* |
 
 ---
 
@@ -61,5 +88,3 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-By default, Polybot Cloud connects to `http://localhost:8799`. Ensure your Polybot harness runner is running (`pnpm dev:server` in the `polybot` repo).
