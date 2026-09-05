@@ -73,6 +73,18 @@ export default function PolybotCloudDashboard() {
   }, [loadAllData]);
 
   useEffect(() => {
+    // Detect instant pairing parameters from QR code scan or share link
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const runnerParam = searchParams.get("runner");
+      const tokenParam = searchParams.get("token");
+      if (runnerParam) {
+        const { setStoredConnection } = require("../lib/client");
+        setStoredConnection(runnerParam, tokenParam || "");
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    }
+
     void checkConnection();
 
     // Auto-refresh data every 8 seconds
